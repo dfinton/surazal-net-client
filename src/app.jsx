@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import Header from './components/header';
+
 const App = observer(
   class App extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ const App = observer(
 
       return (
         <div>
-          <h1>Welcome to the 24th Dimension!</h1>
+          <Header />
           {postList}
         </div>
       );
