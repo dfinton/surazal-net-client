@@ -1,0 +1,42 @@
+html {
+  background-color: #222;
+  color: white;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .header {
+      text-align: center;
+    }
+
+    .body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      align-content: stretch;
+
+      .column {
+        flex: 1;
+      }
+
+      .content {
+        flex: 4;
+      }
+    }
+
+    .top-level {
+      box-shadow:
+        inset 6px 6px 6px 0 rgba(0, 0, 0, 0.4),
+        inset -6px -6px 6px 0 rgba(255, 255, 255, 0.4);
+
+      margin: 6px;
+      padding: 12px;
+
+      background-color: #444;
+    }
+  }
+}
