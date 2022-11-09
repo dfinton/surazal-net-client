@@ -6,7 +6,7 @@ import Content from './content';
 class Body extends Component {
   render() {
     return (
-      <div class="body">
+      <div className="body">
         <Column />
         <Content />
       </div>

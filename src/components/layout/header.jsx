@@ -3,7 +3,7 @@ import { Component } from 'react';
 class Header extends Component {
   render() {
     return (
-      <header class="top-level header">
+      <header className="top-level header">
         <h1>The 24th Dimension</h1>
       </header>
     );

@@ -10,12 +10,15 @@ const Blog = observer(
     constructor(props) {
       super(props);
 
-      this.cmsPost = cmsPostStore();
-      this.cmsPost.fetchPostList();
+      this.state = {
+        cmsPost: cmsPostStore(),
+      };
+
+      this.state.cmsPost.fetchPostList();
     }
 
     render() {
-      const postList = this.cmsPost.postList.map(post => {
+      const postList = this.state.cmsPost.postList.map(post => {
         const content = post.content.document.map(postDocument => {
           let children;
 
@@ -37,8 +40,7 @@ const Blog = observer(
       });
 
       return (
-        <div class="blog">
-          <h2>Blog</h2>
+        <div className="blog">
           {postList}
         </div>
       );
