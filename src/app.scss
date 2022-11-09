@@ -3,6 +3,49 @@ html {
   color: white;
   font-family: 'Helvetica', 'Arial', sans-serif;
 
+  a:link, a:hover {
+    color: #9FA;
+  }
+
+  a:visited, a:active {
+    color: #CDF;
+  }
+
+  .left {
+    text-align: left;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .blog .layout {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .blog .layout.layout-1-1 > *,
+  .blog .layout.layout-1-1-1 > *,
+  .blog .layout.layout-1-2 > *:nth-child(1),
+  .blog .layout.layout-2-1 > *:nth-child(2),
+  .blog .layout.layout-1-2-1 > *:nth-child(1),
+  .blog .layout.layout-1-2-1 > *:nth-child(3),
+  {
+    flex: 1;
+  }
+
+  .blog .layout.layout-1-2 > *:nth-child(2),
+  .blog .layout.layout-2-1 > *:nth-child(1),
+  .blog .layout.layout-1-2-1 > *:nth-child(2),
+  {
+    flex: 2;
+  }
+
   .app {
     display: flex;
     flex-direction: column;
