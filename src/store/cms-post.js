@@ -22,6 +22,11 @@ class CmsPostStore {
           title,
           content {
             document
+          },
+          author {
+            id,
+            name,
+            email
           }
         }
       }

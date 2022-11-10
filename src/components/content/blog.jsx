@@ -158,7 +158,8 @@ const Blog = observer(
 
         return (
           <div key={post.id}>
-            <h3>{post.title}</h3>
+            <h2>{post.title}</h2>
+            <div>by {post.author.name}</div>
             <div>{content}</div>
           </div>
         );
