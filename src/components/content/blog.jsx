@@ -156,10 +156,21 @@ const Blog = observer(
           });
         });
 
+        const createdAt = new Date(post.createdAt)
+          .toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZone: 'UTC',
+          });
+
         return (
           <div key={post.id}>
             <h2>{post.title}</h2>
-            <div>by {post.author.name}</div>
+            <div>by <strong>{post.author.name}</strong> on <strong>{createdAt}</strong></div>
             <div>{content}</div>
           </div>
         );

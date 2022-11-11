@@ -18,15 +18,19 @@ class CmsPostStore {
     const data = await cms(`
       {
         posts {
-          id,
-          title,
+          id
+          title
           content {
             document
-          },
+          }
           author {
-            id,
-            name,
+            id
+            name
             email
+          }
+          createdAt
+          fractals {
+            id
           }
         }
       }
