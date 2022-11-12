@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-class Column extends Component {
+class ColumnComponent extends Component {
   render() {
     return (
       <div className="top-level column">
@@ -15,4 +15,4 @@ class Column extends Component {
   }
 }
 
-export default Column;
+export default ColumnComponent;

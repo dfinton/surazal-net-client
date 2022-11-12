@@ -1,15 +1,15 @@
 import { Component } from 'react';
 
-import Blog from '../content/blog';
+import BlogComponent from './blog';
 
-class Content extends Component {
+class RootComponent extends Component {
   render() {
     return (
       <div className="top-level content">
-        <Blog />
+        <BlogComponent />
       </div>
     );
   }
 }
 
-export default Content;
+export default RootComponent;

@@ -133,8 +133,8 @@ const convertToHtml = ({documentObject, documentObjectIndex}) => {
   return <span key={documentObjectIndex}>{documentElement}</span>;
 }
 
-const Blog = observer(
-  class Blog extends Component {
+const BlogComponent = observer(
+  class BlogComponent extends Component {
     cmsPost;
 
     constructor(props) {
@@ -212,4 +212,4 @@ const Blog = observer(
   }
 );
 
-export default Blog;
+export default BlogComponent;

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-class Header extends Component {
+class HeaderComponent extends Component {
   render() {
     return (
       <header className="top-level header">
@@ -10,4 +10,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default HeaderComponent;
