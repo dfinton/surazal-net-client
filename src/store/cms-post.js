@@ -4,24 +4,34 @@ import cms from '../service/cms';
 let cmsPostStoreSingleton;
 
 class CmsPostStore {
-  postList = [];
+  post = {};
+  latestPostId = undefined;
+  postSummaryList = [];
 
   constructor() {
     makeObservable(this, {
-      postList: observable,
-      fetchPostList: action,
-      setPostList: action,
+      post: observable,
+      latestPostId: observable,
+      postSummaryList: observable,
+      fetchLatestPost: action,
+      fetchPost: action,
+      setPost: action,
     });
   }
 
-  async fetchPostList() {
+  async fetchPost({id}) {
+    if (this.post[id]) {
+      return;
+    }
+
     const data = await cms(`
       {
         posts(
-          orderBy: [{
-            createdAt: desc
-          }]
-          take: 2
+          where: {
+            id: {
+              equals: "${id}"
+            }
+          }
         ) {
           id
           title
@@ -50,11 +60,72 @@ class CmsPostStore {
       }
     `);
 
-    this.setPostList(data.posts);
+    if (!data.posts) {
+      return;
+    }
+
+    const [post] = data.posts;
+
+    this.setPost({post});
   }
 
-  setPostList(postList) {
-    this.postList = postList;
+  async fetchLatestPost() {
+    if (this.latestPostId !== undefined) {
+      return;
+    }
+
+    const data = await cms(`
+      {
+        posts(
+          orderBy: [{
+            createdAt: desc
+          }]
+          take: 1
+        ) {
+          id
+          title
+          content {
+            document
+          }
+          author {
+            id
+            name
+            email
+          }
+          createdAt
+          fractals {
+            id
+            altText
+            thumbnail {
+              id
+              filesize
+              width
+              height
+              extension
+              url
+            }
+          }
+        }
+      }
+    `);
+
+    if (!data.posts) {
+      return;
+    }
+
+    const [post] = data.posts;
+
+    this.setPost({post, isLatest: true});
+  }
+
+  setPost({post, isLatest = false}) {
+    const id = post.id;
+
+    this.post[id] = post;
+
+    if (isLatest) {
+      this.latestPostId = id;
+    }
   }
 }
 

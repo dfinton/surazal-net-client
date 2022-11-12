@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { observer } from 'mobx-react';
+import { Link } from "react-router-dom";
 
 import cmsPostStore from '../../store/cms-post';
 
@@ -135,8 +136,6 @@ const convertToHtml = ({documentObject, documentObjectIndex}) => {
 
 const BlogComponent = observer(
   class BlogComponent extends Component {
-    cmsPost;
-
     constructor(props) {
       super(props);
 
@@ -144,70 +143,77 @@ const BlogComponent = observer(
         cmsPost: cmsPostStore(),
       };
 
-      this.state.cmsPost.fetchPostList();
+      this.state.cmsPost.fetchLatestPost();
     }
 
     render() {
-      const postList = this.state.cmsPost.postList.map(post => {
-        const content = post.content.document.map((postDocument, postDocumentIndex) => {
-          return convertToHtml({
-            documentObject: postDocument,
-            documentObjectIndex: postDocumentIndex,
-          });
+      const id = this.state.cmsPost.latestPostId;
+      const post = this.state.cmsPost.post[id];
+
+      if (post === undefined) {
+        return;
+      }
+
+      const content = post.content.document.map((postDocument, postDocumentIndex) => {
+        return convertToHtml({
+          documentObject: postDocument,
+          documentObjectIndex: postDocumentIndex,
         });
-
-        const createdAt = new Date(post.createdAt)
-          .toLocaleString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            timeZone: 'America/Chicago',
-          });
-
-        const authorAttribution = post.author ? post.author.name : 'Unknown';
-
-        let fractalGallery;
-
-        if (post.fractals) {
-          const fractalThumbnails = post.fractals.map(fractal => {
-            if (!fractal.thumbnail) {
-              return undefined;
-            }
-
-            return (
-              <div className="blog-fractal-thumbnail">
-                <div className="blog-fractal-thumbnail-image">
-                  <img src={fractal.thumbnail.url} alt={fractal.altText} />
-                </div>
-              </div>
-            )
-          });
-
-          fractalGallery = (
-            <div className="blog-fractal-gallery">
-              {fractalThumbnails}
-            </div>
-          );
-        }
-
-        return (
-          <div key={post.id} className="blog-post">
-            <div className="blog-header">
-              <h2>{post.title}</h2>
-              <div>by <strong>{authorAttribution}</strong> on <strong>{createdAt}</strong></div>
-            </div>
-            <div className="blog-body">
-              <div>{content}</div>
-              {fractalGallery}
-            </div>
-          </div>
-        );
       });
 
-      return postList;
+      const createdAt = new Date(post.createdAt)
+        .toLocaleString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          timeZone: 'America/Chicago',
+        });
+
+      const blogLink = (
+        <Link to={`/blog/${post.id}`}>{createdAt}</Link>
+      );
+
+      const authorAttribution = post.author ? post.author.name : 'Unknown';
+
+      let fractalGallery;
+
+      if (post.fractals) {
+        const fractalThumbnails = post.fractals.map(fractal => {
+          if (!fractal.thumbnail) {
+            return undefined;
+          }
+
+          return (
+            <div className="blog-fractal-thumbnail">
+              <div className="blog-fractal-thumbnail-image">
+                <img src={fractal.thumbnail.url} alt={fractal.altText} />
+              </div>
+            </div>
+          )
+        });
+
+        fractalGallery = (
+          <div className="blog-fractal-gallery">
+            {fractalThumbnails}
+          </div>
+        );
+      }
+
+      return (
+        <div key={post.id} className="blog-post">
+          <div className="blog-header">
+            <h2>{post.title}</h2>
+            <div>by <strong>{authorAttribution}</strong> on {blogLink}</div>
+          </div>
+          <div className="blog-body">
+            <div>{content}</div>
+            {fractalGallery}
+          </div>
+        </div>
+      );
     }
   }
 );

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class ColumnComponent extends Component {
   render() {
@@ -8,7 +9,7 @@ class ColumnComponent extends Component {
           <h2>Navigate</h2>
         </div>
         <div className="column-body">
-          <a href="/">Main Page</a>
+          <Link to={"/"}>Main Page</Link>
         </div>
       </div>
     );
