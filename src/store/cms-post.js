@@ -17,7 +17,12 @@ class CmsPostStore {
   async fetchPostList() {
     const data = await cms(`
       {
-        posts {
+        posts(
+          orderBy: [{
+            createdAt: desc
+          }]
+          take: 1
+        ) {
           id
           title
           content {
