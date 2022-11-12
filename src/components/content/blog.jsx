@@ -168,19 +168,19 @@ const Blog = observer(
           });
 
         return (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <div>by <strong>{post.author.name}</strong> on <strong>{createdAt}</strong></div>
-            <div>{content}</div>
+          <div key={post.id} className="blog-post">
+            <div className="blog-header">
+              <h2>{post.title}</h2>
+              <div>by <strong>{post.author.name}</strong> on <strong>{createdAt}</strong></div>
+            </div>
+            <div className="blog-body">
+              <div>{content}</div>
+            </div>
           </div>
         );
       });
 
-      return (
-        <div className="blog">
-          {postList}
-        </div>
-      );
+      return postList;
     }
   }
 );

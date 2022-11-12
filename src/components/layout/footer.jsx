@@ -4,7 +4,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="top-level footer">
-        <h2>Footer</h2>
+        <a rel="me" href="https://mastodon.surazal.net/@zalasur">Check out my Mastodon Feed!</a>
       </div>
     );
   }

@@ -31,6 +31,14 @@ class CmsPostStore {
           createdAt
           fractals {
             id
+            thumbnail {
+              id
+              filesize
+              width
+              height
+              extension
+              url
+            }
           }
         }
       }
