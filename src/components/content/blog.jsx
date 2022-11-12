@@ -164,7 +164,7 @@ const Blog = observer(
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
-            timeZone: 'UTC',
+            timeZone: 'America/Chicago',
           });
 
         return (
