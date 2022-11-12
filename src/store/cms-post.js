@@ -21,7 +21,7 @@ class CmsPostStore {
           orderBy: [{
             createdAt: desc
           }]
-          take: 1
+          take: 2
         ) {
           id
           title
