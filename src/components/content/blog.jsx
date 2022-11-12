@@ -167,14 +167,41 @@ const Blog = observer(
             timeZone: 'America/Chicago',
           });
 
+        const authorAttribution = post.author ? post.author.name : 'Unknown';
+
+        let fractalGallery;
+
+        if (post.fractals) {
+          const fractalThumbnails = post.fractals.map(fractal => {
+            if (!fractal.thumbnail) {
+              return undefined;
+            }
+
+            return (
+              <div className="blog-fractal-thumbnail">
+                <div className="blog-fractal-thumbnail-image">
+                  <img src={fractal.thumbnail.url} alt={fractal.altText} />
+                </div>
+              </div>
+            )
+          });
+
+          fractalGallery = (
+            <div className="blog-fractal-gallery">
+              {fractalThumbnails}
+            </div>
+          );
+        }
+
         return (
           <div key={post.id} className="blog-post">
             <div className="blog-header">
               <h2>{post.title}</h2>
-              <div>by <strong>{post.author.name}</strong> on <strong>{createdAt}</strong></div>
+              <div>by <strong>{authorAttribution}</strong> on <strong>{createdAt}</strong></div>
             </div>
             <div className="blog-body">
               <div>{content}</div>
+              {fractalGallery}
             </div>
           </div>
         );
