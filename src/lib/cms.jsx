@@ -1,13 +1,7 @@
-import { Component } from 'react';
-import { observer } from 'mobx-react';
-import { Link } from "react-router-dom";
-
-import cmsPostStore from '../../store/cms-post';
-
-const convertToHtml = ({documentObject, documentObjectIndex}) => {
+const convertDocumentObjectToElement = ({documentObject, documentObjectIndex}) => {
   if (documentObject.children) {
     let childrenHtml = documentObject.children.map((child, childIndex) => {
-      return convertToHtml({
+      return convertDocumentObjectToElement({
         documentObject: child,
         documentObjectIndex: childIndex,
       });
@@ -134,88 +128,6 @@ const convertToHtml = ({documentObject, documentObjectIndex}) => {
   return <span key={documentObjectIndex}>{documentElement}</span>;
 }
 
-const BlogComponent = observer(
-  class BlogComponent extends Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        cmsPost: cmsPostStore(),
-      };
-
-      this.state.cmsPost.fetchLatestPost();
-    }
-
-    render() {
-      const id = this.state.cmsPost.latestPostId;
-      const post = this.state.cmsPost.post[id];
-
-      if (post === undefined) {
-        return;
-      }
-
-      const content = post.content.document.map((postDocument, postDocumentIndex) => {
-        return convertToHtml({
-          documentObject: postDocument,
-          documentObjectIndex: postDocumentIndex,
-        });
-      });
-
-      const createdAt = new Date(post.createdAt)
-        .toLocaleString('en-US', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          timeZone: 'America/Chicago',
-        });
-
-      const blogLink = (
-        <Link to={`/blog/${post.id}`}>{createdAt}</Link>
-      );
-
-      const authorAttribution = post.author ? post.author.name : 'Unknown';
-
-      let fractalGallery;
-
-      if (post.fractals) {
-        const fractalThumbnails = post.fractals.map((fractal, fractalIndex) => {
-          if (!fractal.thumbnail) {
-            return undefined;
-          }
-
-          return (
-            <div key={fractalIndex} className="blog-fractal-thumbnail">
-              <div className="blog-fractal-thumbnail-image">
-                <img src={fractal.thumbnail.url} alt={fractal.altText} />
-              </div>
-            </div>
-          )
-        });
-
-        fractalGallery = (
-          <div className="blog-fractal-gallery">
-            {fractalThumbnails}
-          </div>
-        );
-      }
-
-      return (
-        <div key={post.id} className="blog-post">
-          <div className="blog-header">
-            <h2>{post.title}</h2>
-            <div>by <strong>{authorAttribution}</strong> on {blogLink}</div>
-          </div>
-          <div className="blog-body">
-            <div>{content}</div>
-            {fractalGallery}
-          </div>
-        </div>
-      );
-    }
-  }
-);
-
-export default BlogComponent;
+export {
+  convertDocumentObjectToElement,
+};

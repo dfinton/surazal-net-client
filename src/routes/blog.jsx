@@ -1,23 +1,44 @@
-import { Component } from 'react';
+import { useLoaderData } from "react-router-dom";
 
 import ColumnComponent from '../components/layout/column';
-import BlogComponent from '../components/blog';
+import BlogPostComponent from '../components/blog/post';
 import FooterComponent from '../components/layout/footer';
 import HeaderComponent from '../components/layout/header';
 
-class BlogRoute extends Component {
-  render() {
-    return (
-      <div className="app">
-        <HeaderComponent />
-        <div className="body">
-          <ColumnComponent />
-          <BlogComponent />
-        </div>
-        <FooterComponent />
-      </div>
-    );
-  }
-}
+const blogLoader = (cmsPost) => {
+  return async ({params}) => {
+    const {id} = params;
 
-export default BlogRoute;
+    if (!id) {
+      return undefined;
+    }
+
+    await cmsPost.fetchPost({id});
+
+    return cmsPost.post[id];
+  };
+};
+
+function BlogRoute() {
+  const post = useLoaderData();
+
+  let blogComponent;
+
+  blogComponent = <BlogPostComponent post={post} />;
+
+  return (
+    <div className="app">
+      <HeaderComponent />
+      <div className="body">
+        <ColumnComponent />
+        {blogComponent}
+      </div>
+      <FooterComponent />
+    </div>
+  );
+};
+
+export {
+  blogLoader,
+  BlogRoute,
+};

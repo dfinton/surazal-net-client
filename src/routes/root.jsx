@@ -20,4 +20,6 @@ class RootRoute extends Component {
   }
 }
 
-export default RootRoute;
+export {
+  RootRoute,
+};
