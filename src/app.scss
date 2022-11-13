@@ -27,7 +27,7 @@ html {
       }
 
       .content {
-        flex: 4;
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -67,6 +67,10 @@ html {
 
   .right {
     text-align: right;
+  }
+
+  .root-content {
+    flex: 1;
   }
 
   .blog-post .layout {

@@ -7,7 +7,7 @@ class RootComponent extends Component {
     const post = this.props.post;
 
     return (
-      <div className="top-level content">
+      <div className="root-content">
         <BlogPostComponent post={post} />
       </div>
     );

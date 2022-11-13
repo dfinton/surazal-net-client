@@ -20,26 +20,40 @@ const blogLoader = async ({params}) => {
   return cmsPost.post[id];
 };
 
+const blogListLoader = async ({params}) => {
+  const {page = 1, pageSize = 10} = params;
+
+  await cmsPost.fetchPostList({page, pageSize});
+
+  return (cmsPost.postList);
+};
+
 function BlogRoute() {
   const post = useLoaderData();
-
-  let blogComponent;
-
-  blogComponent = <BlogPostComponent post={post} />;
 
   return (
     <div className="app">
       <HeaderComponent />
       <div className="body">
         <ColumnComponent />
-        {blogComponent}
+        <BlogPostComponent post={post} />
       </div>
       <FooterComponent />
     </div>
   );
 };
 
+function BlogListRoute() {
+  return (
+    <div>
+      BLOG LIST
+    </div>
+  );
+};
+
 export {
   blogLoader,
+  blogListLoader,
   BlogRoute,
+  BlogListRoute,
 };

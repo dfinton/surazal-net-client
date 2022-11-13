@@ -9,7 +9,10 @@ class ColumnComponent extends Component {
           <h2>Navigate</h2>
         </div>
         <div className="column-body">
-          <Link to={"/"}>Main Page</Link>
+          <ul className="column-links">
+            <li><Link to={"/"}>Main Page</Link></li>
+            <li><Link to={"/blog"}>Blog</Link></li>
+          </ul>
         </div>
       </div>
     );

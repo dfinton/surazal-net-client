@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { BlogRoute, blogLoader } from "./routes/blog";
+import { BlogRoute, BlogListRoute, blogLoader, blogListLoader } from "./routes/blog";
 import { RootRoute, rootLoader } from "./routes/root";
 import './app.scss';
 
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/blog",
-    element: <BlogRoute />,
-    loader: blogLoader,
+    element: <BlogListRoute />,
+    loader: blogListLoader,
   },
   {
     path: "/blog/:id",

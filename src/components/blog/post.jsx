@@ -27,8 +27,12 @@ class BlogPostComponent extends Component {
         timeZone: 'America/Chicago',
       });
 
-    const blogLink = (
+    const blogPostLink = (
       <Link to={`/blog/${post.id}`}>{createdAt}</Link>
+    );
+
+    const blogPostListLink = (
+      <Link to={'/blog'}>View older posts</Link>
     );
 
     const authorAttribution = post.author ? post.author.name : 'Unknown';
@@ -62,7 +66,7 @@ class BlogPostComponent extends Component {
         <div className="blog-post">
           <div className="blog-header">
             <h2>{post.title}</h2>
-            <div>by <strong>{authorAttribution}</strong> on {blogLink}</div>
+            <div>by <strong>{authorAttribution}</strong> on {blogPostLink} ({blogPostListLink})</div>
           </div>
           <div className="blog-body">
             <div>{fullPost}</div>

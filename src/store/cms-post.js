@@ -15,7 +15,9 @@ class CmsPostStore {
       postSummaryList: observable,
       fetchLatestPost: action,
       fetchPost: action,
+      fetchPostList: action,
       setPost: action,
+      setPostList: action,
     });
   }
 
@@ -26,11 +28,9 @@ class CmsPostStore {
 
     const data = await cms(`
       {
-        posts(
+        post(
           where: {
-            id: {
-              equals: "${id}"
-            }
+            id: "${id}"
           }
         ) {
           id
@@ -60,13 +60,11 @@ class CmsPostStore {
       }
     `);
 
-    if (!data.posts) {
+    if (!data.post) {
       return;
     }
 
-    const [post] = data.posts;
-
-    this.setPost({post});
+    this.setPost({post: data.post});
   }
 
   async fetchLatestPost() {
@@ -118,6 +116,33 @@ class CmsPostStore {
     this.setPost({post, isLatest: true});
   }
 
+  async fetchPostList({page, pageSize}) {
+    const take = pageSize;
+    const skip = (page - 1) * pageSize;
+
+    const data = await cms(`
+      {
+        posts(
+          take: ${take}
+          skip: ${skip}
+        ) {
+          id
+          title
+          author {
+            id
+            name
+            email
+          }
+          createdAt
+        }
+      }
+    `);
+
+    const posts = data.posts ?? [];
+
+    this.setPostList({posts});
+  }
+
   setPost({post, isLatest = false}) {
     const id = post.id;
 
@@ -126,6 +151,10 @@ class CmsPostStore {
     if (isLatest) {
       this.latestPostId = id;
     }
+  }
+
+  setPostList({posts}) {
+    this.postList = posts;
   }
 }
 
