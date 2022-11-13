@@ -6,27 +6,25 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import cmsPostStore from './store/cms-post';
 import { BlogRoute, blogLoader } from "./routes/blog";
-import { RootRoute } from "./routes/root";
+import { RootRoute, rootLoader } from "./routes/root";
 import './app.scss';
-
-const cmsPost = cmsPostStore();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootRoute cmsPost={cmsPost} />,
+    element: <RootRoute />,
+    loader: rootLoader,
   },
   {
     path: "/blog",
     element: <BlogRoute />,
-    loader: blogLoader(cmsPost),
+    loader: blogLoader,
   },
   {
     path: "/blog/:id",
     element: <BlogRoute />,
-    loader: blogLoader(cmsPost),
+    loader: blogLoader,
   },
 ]);
 

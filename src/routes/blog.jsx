@@ -4,19 +4,20 @@ import ColumnComponent from '../components/layout/column';
 import BlogPostComponent from '../components/blog/post';
 import FooterComponent from '../components/layout/footer';
 import HeaderComponent from '../components/layout/header';
+import cmsPostStore from '../store/cms-post';
 
-const blogLoader = (cmsPost) => {
-  return async ({params}) => {
-    const {id} = params;
+const cmsPost = cmsPostStore();
 
-    if (!id) {
-      return undefined;
-    }
+const blogLoader = async ({params}) => {
+  const {id} = params;
 
-    await cmsPost.fetchPost({id});
+  if (!id) {
+    return undefined;
+  }
 
-    return cmsPost.post[id];
-  };
+  await cmsPost.fetchPost({id});
+
+  return cmsPost.post[id];
 };
 
 function BlogRoute() {

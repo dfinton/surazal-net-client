@@ -1,12 +1,14 @@
 import { Component } from 'react';
 
-import BlogComponent from './blog';
+import BlogPostComponent from '../blog/post';
 
 class RootComponent extends Component {
   render() {
+    const post = this.props.post;
+
     return (
       <div className="top-level content">
-        <BlogComponent />
+        <BlogPostComponent post={post} />
       </div>
     );
   }
