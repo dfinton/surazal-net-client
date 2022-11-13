@@ -123,6 +123,9 @@ class CmsPostStore {
     const data = await cms(`
       {
         posts(
+          orderBy: [{
+            createdAt: desc
+          }]
           take: ${take}
           skip: ${skip}
         ) {

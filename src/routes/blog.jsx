@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 import ColumnComponent from '../components/layout/column';
 import BlogPostComponent from '../components/blog/post';
+import BlogPostListComponent from '../components/blog/post-list';
 import FooterComponent from '../components/layout/footer';
 import HeaderComponent from '../components/layout/header';
 import cmsPostStore from '../store/cms-post';
@@ -44,9 +45,16 @@ function BlogRoute() {
 };
 
 function BlogListRoute() {
+  const postList = useLoaderData();
+
   return (
-    <div>
-      BLOG LIST
+    <div className="app">
+      <HeaderComponent />
+      <div className="body">
+        <ColumnComponent />
+        <BlogPostListComponent postList={postList} />
+      </div>
+      <FooterComponent />
     </div>
   );
 };
