@@ -12,6 +12,7 @@ class ColumnComponent extends Component {
           <ul className="column-links">
             <li><Link to={"/"}>Main Page</Link></li>
             <li><Link to={"/blog"}>Blog</Link></li>
+            <li><Link to={"/fractal"}>Fractals</Link></li>
           </ul>
         </div>
       </div>

@@ -169,6 +169,7 @@ html {
       flex-direction: row;
       align-items: stretch;
       justify-content: center;
+      flex-wrap: wrap;
 
       .blog-fractal-thumbnail {
         background-color: #655545;
@@ -196,6 +197,54 @@ html {
             object-fit: contain;
           }
         }
+      }
+    }
+  }
+
+  .fractal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 0.25rem;
+    overflow: hidden;
+
+    .fractal-image-links {
+      background-color: #453525;
+      padding: 0.5rem;
+
+      .fractal-image-thumbnail {
+        width: 160px;
+        height: 90px;
+        max-width: 160px;
+        max-height: 90px;
+        overflow: hidden;
+        margin: 0.5rem;
+      }
+    }
+  }
+
+  .fractal-image-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 0.25rem;
+    overflow: hidden;
+
+    .fractal-image-list-gallery {
+      background-color: #453525;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      flex-wrap: wrap;
+
+      .fractal-image-list-thumbnail {
+        width: 160px;
+        height: 90px;
+        max-width: 160px;
+        max-height: 90px;
+        overflow: hidden;
+        margin: 0.5rem;
       }
     }
   }

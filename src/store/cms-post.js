@@ -46,6 +46,7 @@ class CmsPostStore {
           createdAt
           fractals {
             id
+            name
             altText
             thumbnail {
               id
@@ -94,6 +95,7 @@ class CmsPostStore {
           fractals {
             id
             altText
+          createdAt
             thumbnail {
               id
               filesize

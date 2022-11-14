@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import { BlogRoute, BlogListRoute, blogLoader, blogListLoader } from "./routes/blog";
+import { FractalRoute, FractalListRoute, fractalLoader, fractalListLoader } from "./routes/fractal";
 import { RootRoute, rootLoader } from "./routes/root";
 import './app.scss';
 
@@ -25,6 +26,16 @@ const router = createBrowserRouter([
     path: "/blog/:id",
     element: <BlogRoute />,
     loader: blogLoader,
+  },
+  {
+    path: "/fractal",
+    element: <FractalListRoute />,
+    loader: fractalListLoader,
+  },
+  {
+    path: "/fractal/:id",
+    element: <FractalRoute />,
+    loader: fractalLoader,
   },
 ]);
 

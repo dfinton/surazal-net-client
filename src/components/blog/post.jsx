@@ -48,7 +48,9 @@ class BlogPostComponent extends Component {
         return (
           <div key={fractalIndex} className="blog-fractal-thumbnail">
             <div className="blog-fractal-thumbnail-image">
-              <img src={fractal.thumbnail.url} alt={fractal.altText} />
+              <Link to={`/fractal/${fractal.id}`}>
+                <img src={fractal.thumbnail.url} alt={fractal.altText} />
+              </Link>
             </div>
           </div>
         )
