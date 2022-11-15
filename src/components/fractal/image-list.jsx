@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-
 import { Component } from 'react';
+
+import FractalThumbnailComponent from './thumbnail';
 
 class FractalImageListComponent extends Component {
   render() {
@@ -8,11 +8,7 @@ class FractalImageListComponent extends Component {
 
     const fractalListGallery = fractalList.map((fractal, fractalIndex) => {
       return (
-        <div key={fractalIndex} className="fractal-image-list-thumbnail">
-          <Link to={`/fractal/${fractal.id}`}>
-            <img alt={fractal.altText} src={fractal.thumbnail.url} />
-          </Link>
-        </div>
+        <FractalThumbnailComponent key={fractalIndex} fractal={fractal} />
       );
     });
 

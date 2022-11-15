@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import FractalThumbnailComponent from './thumbnail';
+
 class FractalImageComponent extends Component {
   render() {
     const fractal = this.props.fractal;
@@ -50,9 +52,7 @@ class FractalImageComponent extends Component {
       <div className="top-level content">
         <div className="fractal-image">
           <div className="fractal-image-links">
-            <div className="fractal-image-thumbnail">
-              <img alt={fractal.altText} src={fractal.thumbnail.url} />
-            </div>
+            <FractalThumbnailComponent fractal={fractal} />
             <ul>
               {thumbnailLink}
               {smallLink}

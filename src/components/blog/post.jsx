@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { convertDocumentObjectToElement } from '../../lib/cms';
 
+import FractalThumbnailComponent from '../fractal/thumbnail';
+
 class BlogPostComponent extends Component {
   render() {
     const post = this.props.post;
@@ -41,18 +43,8 @@ class BlogPostComponent extends Component {
 
     if (post.fractals) {
       const fractalThumbnails = post.fractals.map((fractal, fractalIndex) => {
-        if (!fractal.thumbnail) {
-          return undefined;
-        }
-
         return (
-          <div key={fractalIndex} className="blog-fractal-thumbnail">
-            <div className="blog-fractal-thumbnail-image">
-              <Link to={`/fractal/${fractal.id}`}>
-                <img src={fractal.thumbnail.url} alt={fractal.altText} />
-              </Link>
-            </div>
-          </div>
+          <FractalThumbnailComponent key={fractalIndex} fractal={fractal} />
         )
       });
 
