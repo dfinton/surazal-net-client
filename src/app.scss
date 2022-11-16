@@ -8,23 +8,12 @@ html {
     flex-direction: column;
     align-items: stretch;
 
-    .header, .footer {
-      background-color: #655545;
-      border-radius: 0.25rem;
-      text-align: center;
-      padding: 0.5rem;
-    }
-
     .body {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: stretch;
       align-content: stretch;
-
-      .column {
-        flex: 0 1 15rem;
-      }
 
       .content {
         flex: 1;
@@ -200,26 +189,6 @@ html {
       flex-direction: row;
       align-items: stretch;
       flex-wrap: wrap;
-    }
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 0.25rem;
-    overflow: hidden;
-
-    .column-header {
-      background-color: #655545;
-      margin-bottom: 0.125rem;
-      padding: 0.5rem;
-    }
-
-    .column-body {
-      background-color: #453525;
-      padding: 0.5rem;
-      flex-grow: 1;
     }
   }
 }

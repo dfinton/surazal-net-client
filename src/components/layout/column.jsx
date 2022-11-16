@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import './column.scss';
+
 class ColumnComponent extends Component {
   render() {
     return (
