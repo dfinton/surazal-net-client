@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import FractalThumbnailComponent from './thumbnail';
+import './image-list.scss';
 
 class FractalImageListComponent extends Component {
   render() {

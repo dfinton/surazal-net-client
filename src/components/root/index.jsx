@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import BlogPostComponent from '../blog/post';
+import './index.scss';
 
 class RootComponent extends Component {
   render() {

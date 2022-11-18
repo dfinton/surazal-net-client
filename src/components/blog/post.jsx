@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { convertDocumentObjectToElement } from '../../lib/cms';
 
 import FractalThumbnailComponent from '../fractal/thumbnail';
+import './post.scss';
 
 class BlogPostComponent extends Component {
   render() {

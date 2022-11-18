@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import './post-list.scss';
+
 class BlogPostListComponent extends Component {
   render() {
     const postList = this.props.postList;

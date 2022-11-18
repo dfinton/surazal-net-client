@@ -4,13 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border-radius: 0.25rem;
-  overflow: hidden;
 
   .column-header {
     background-color: #655545;
     margin-bottom: 0.125rem;
-    padding: 0.5rem;
   }
 
   .column-body {

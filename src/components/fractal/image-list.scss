@@ -1,0 +1,16 @@
+.fractal-image-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  .fractal-image-list-gallery {
+    background-color: #453525;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+}
