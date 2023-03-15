@@ -6,15 +6,19 @@ let cmsFractalStoreSingleton;
 class CmsFractalStore {
   fractal = {};
   fractalList = [];
+  fractalCount = undefined;
 
   constructor() {
     makeObservable(this, {
       fractal: observable,
       fractalList: observable,
+      fractalCount: observable,
       fetchFractal: action,
       fetchFractalList: action,
+      fetchFractalCount: action,
       setFractal: action,
       setFractalList: action,
+      setFractalCount: action,
     })
   }
 
@@ -111,12 +115,32 @@ class CmsFractalStore {
     this.setFractalList({fractals});
   }
 
+  async fetchFractalCount() {
+    if (this.fractalCount !== undefined) {
+      return;
+    }
+
+    const data = await cms(`
+      {
+        fractalsCount
+      }
+    `);
+
+    const fractalCount = data.fractalsCount ?? 0;
+
+    this.setFractalCount({fractalCount});
+  }
+
   setFractal({fractal}) {
     this.fractal[fractal.id] = fractal;
   }
 
   setFractalList({fractals}) {
     this.fractalList = fractals;
+  }
+
+  setFractalCount({fractalCount}) {
+    this.fractalCount = fractalCount;
   }
 }
 

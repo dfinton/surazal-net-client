@@ -7,17 +7,21 @@ class CmsPostStore {
   post = {};
   latestPostId = undefined;
   postSummaryList = [];
+  postCount = undefined;
 
   constructor() {
     makeObservable(this, {
       post: observable,
       latestPostId: observable,
       postSummaryList: observable,
+      postCount: observable,
       fetchLatestPost: action,
       fetchPost: action,
       fetchPostList: action,
+      fetchPostCount: action,
       setPost: action,
       setPostList: action,
+      setPostCount: action,
     });
   }
 
@@ -150,6 +154,22 @@ class CmsPostStore {
     this.setPostList({posts});
   }
 
+  async fetchPostCount() {
+    if (this.postCount !== undefined) {
+      return;
+    }
+
+    const data = await cms(`
+      {
+        postsCount
+      }
+    `);
+
+    const postCount = data.postsCount ?? 0;
+
+    this.setPostCount({postCount});
+  }
+
   setPost({post, isLatest = false}) {
     const id = post.id;
 
@@ -162,6 +182,10 @@ class CmsPostStore {
 
   setPostList({posts}) {
     this.postList = posts;
+  }
+
+  setPostCount({postCount}) {
+    this.postCount = postCount;
   }
 }
 

@@ -21,7 +21,7 @@ const blogLoader = async ({params}) => {
   return cmsPost.post[id];
 };
 
-const blogListLoader = async ({request, params}) => {
+const blogListLoader = async ({request}) => {
   const searchParams = new URL(request.url).searchParams;
   const page = searchParams.get('page') ?? 1;
   const pageSize = searchParams.get('pageSize') ?? 10;
