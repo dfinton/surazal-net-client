@@ -21,8 +21,10 @@ const blogLoader = async ({params}) => {
   return cmsPost.post[id];
 };
 
-const blogListLoader = async ({params}) => {
-  const {page = 1, pageSize = 10} = params;
+const blogListLoader = async ({request, params}) => {
+  const searchParams = new URL(request.url).searchParams;
+  const page = searchParams.get('page') ?? 1;
+  const pageSize = searchParams.get('pageSize') ?? 10;
 
   await cmsPost.fetchPostList({page, pageSize});
 

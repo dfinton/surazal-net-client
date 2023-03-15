@@ -21,8 +21,10 @@ const fractalLoader = async ({params}) => {
   return cmsFractal.fractal[id];
 };
 
-const fractalListLoader = async ({params}) => {
-  const {page = 1, pageSize = 10} = params;
+const fractalListLoader = async ({request, params}) => {
+  const searchParams = new URL(request.url).searchParams;
+  const page = searchParams.get('page') ?? 1;
+  const pageSize = searchParams.get('pageSize') ?? 10;
 
   await cmsFractal.fetchFractalList({page, pageSize});
 
