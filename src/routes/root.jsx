@@ -13,11 +13,13 @@ const rootLoader = async () => {
 
   const id = cmsPost.latestPostId;
 
-  return cmsPost.post[id];
+  return {
+    post: cmsPost.post[id],
+  };
 };
 
 const RootRoute = function() {
-  const post = useLoaderData();
+  const {post} = useLoaderData();
 
   return (
     <div className="app">

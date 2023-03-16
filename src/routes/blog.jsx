@@ -18,21 +18,41 @@ const blogLoader = async ({params}) => {
 
   await cmsPost.fetchPost({id});
 
-  return cmsPost.post[id];
+  return {
+    post: cmsPost.post[id],
+  };
 };
 
 const blogListLoader = async ({request}) => {
   const searchParams = new URL(request.url).searchParams;
-  const page = searchParams.get('page') ?? 1;
-  const pageSize = searchParams.get('pageSize') ?? 10;
+  let page = searchParams.get('page') ?? 1;
+  let pageSize = searchParams.get('page-size') ?? 20;
 
-  await cmsPost.fetchPostList({page, pageSize});
+  await Promise.all([
+    cmsPost.fetchPostList({page, pageSize}),
+    cmsPost.fetchPostCount(),
+  ]);
 
-  return (cmsPost.postList);
+  pageSize = Math.max(pageSize, 1);
+
+  const postList = cmsPost.postList;
+  const postCount = cmsPost.postCount;
+  const pageCount = Math.ceil(postCount / pageSize);
+
+  page = Math.max(page, 1);
+  page = Math.min(page, pageCount);
+
+  return {
+    postCount,
+    postList,
+    page,
+    pageSize,
+    pageCount,
+  };
 };
 
 function BlogRoute() {
-  const post = useLoaderData();
+  const {post} = useLoaderData();
 
   return (
     <div className="app">
@@ -47,14 +67,26 @@ function BlogRoute() {
 };
 
 function BlogListRoute() {
-  const postList = useLoaderData();
+  const {
+    postCount,
+    postList,
+    page,
+    pageSize,
+    pageCount,
+  } = useLoaderData();
 
   return (
     <div className="app">
       <HeaderComponent />
       <div className="body">
         <ColumnComponent />
-        <BlogPostListComponent postList={postList} />
+        <BlogPostListComponent
+          postList={postList}
+          postCount={postCount}
+          page={page}
+          pageSize={pageSize}
+          pageCount={pageCount}
+        />
       </div>
       <FooterComponent />
     </div>

@@ -18,7 +18,9 @@ const fractalLoader = async ({params}) => {
 
   await cmsFractal.fetchFractal({id});
 
-  return cmsFractal.fractal[id];
+  return {
+    fractal: cmsFractal.fractal[id],
+  };
 };
 
 const fractalListLoader = async ({request}) => {
@@ -28,11 +30,13 @@ const fractalListLoader = async ({request}) => {
 
   await cmsFractal.fetchFractalList({page, pageSize});
 
-  return (cmsFractal.fractalList);
+  return {
+    fractalList: cmsFractal.fractalList,
+  };
 };
 
 function FractalRoute() {
-  const fractal = useLoaderData();
+  const {fractal} = useLoaderData();
 
   return (
     <div className="app">
@@ -47,7 +51,7 @@ function FractalRoute() {
 };
 
 function FractalListRoute() {
-  const fractalList = useLoaderData();
+  const {fractalList} = useLoaderData();
 
   return (
     <div className="app">

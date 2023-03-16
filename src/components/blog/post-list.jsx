@@ -1,16 +1,26 @@
 import { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import PaginationComponent from '../common/pagination';
 
 import './post-list.scss';
 
 class BlogPostListComponent extends Component {
   render() {
-    const postList = this.props.postList;
+    const {
+      postList,
+      page,
+      pageSize,
+      pageCount,
+    } = this.props;
 
     const pagination = (
-      <div className="blog-post-list-pagination">
-        Don&apos;t worry. There will be pagination controls here soon
-      </div>
+      <PaginationComponent
+        page={page}
+        pageSize={pageSize}
+        pageCount={pageCount}
+        baseUrl="/blog"
+      />
     );
 
     const blogList = postList.map((post, postIndex) => {
