@@ -25,13 +25,29 @@ const fractalLoader = async ({params}) => {
 
 const fractalListLoader = async ({request}) => {
   const searchParams = new URL(request.url).searchParams;
-  const page = searchParams.get('page') ?? 1;
-  const pageSize = searchParams.get('pageSize') ?? 10;
+  let page = searchParams.get('page') ?? 1;
+  let pageSize = searchParams.get('page-size') ?? 24;
 
-  await cmsFractal.fetchFractalList({page, pageSize});
+  await Promise.all([
+    cmsFractal.fetchFractalList({page, pageSize}),
+    cmsFractal.fetchFractalCount(),
+  ]);
+
+  pageSize = Math.max(pageSize, 1);
+
+  const fractalList = cmsFractal.fractalList;
+  const fractalCount = cmsFractal.fractalCount;
+  const pageCount = Math.ceil(fractalCount / pageSize);
+
+  page = Math.max(page, 1);
+  page = Math.min(page, pageCount);
 
   return {
-    fractalList: cmsFractal.fractalList,
+    fractalCount,
+    fractalList,
+    page,
+    pageSize,
+    pageCount,
   };
 };
 
@@ -51,14 +67,26 @@ function FractalRoute() {
 };
 
 function FractalListRoute() {
-  const {fractalList} = useLoaderData();
+  const {
+    fractalCount,
+    fractalList,
+    page,
+    pageSize,
+    pageCount,
+  } = useLoaderData();
 
   return (
     <div className="app">
       <HeaderComponent />
       <div className="body">
         <ColumnComponent />
-        <FractalImageListComponent fractalList={fractalList} />
+        <FractalImageListComponent
+          fractalCount={fractalCount} 
+          fractalList={fractalList} 
+          page={page} 
+          pageSize={pageSize} 
+          pageCount={pageCount} 
+        />
       </div>
       <FooterComponent />
     </div>
