@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import './column.scss';
+import './subheader.scss';
 
 class ColumnComponent extends Component {
   render() {

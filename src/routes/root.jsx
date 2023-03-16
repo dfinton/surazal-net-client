@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import ColumnComponent from '../components/layout/column';
+import SubheaderComponent from '../components/layout/subheader';
 import RootComponent from '../components/root';
 import FooterComponent from '../components/layout/footer';
 import HeaderComponent from '../components/layout/header';
@@ -25,7 +25,7 @@ const RootRoute = function() {
     <div className="app">
       <HeaderComponent />
       <div className="body">
-        <ColumnComponent />
+        <SubheaderComponent />
         <RootComponent post={post} />
       </div>
       <FooterComponent />
