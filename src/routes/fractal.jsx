@@ -57,8 +57,8 @@ function FractalRoute() {
   return (
     <div className="app">
       <HeaderComponent />
+      <SubheaderComponent />
       <div className="body">
-        <SubheaderComponent />
         <FractalImageComponent fractal={fractal} />
       </div>
       <FooterComponent />
@@ -78,8 +78,8 @@ function FractalListRoute() {
   return (
     <div className="app">
       <HeaderComponent />
+      <SubheaderComponent />
       <div className="body">
-        <SubheaderComponent />
         <FractalImageListComponent
           fractalCount={fractalCount} 
           fractalList={fractalList} 

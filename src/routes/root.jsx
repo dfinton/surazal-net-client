@@ -24,8 +24,8 @@ const RootRoute = function() {
   return (
     <div className="app">
       <HeaderComponent />
+      <SubheaderComponent />
       <div className="body">
-        <SubheaderComponent />
         <RootComponent post={post} />
       </div>
       <FooterComponent />

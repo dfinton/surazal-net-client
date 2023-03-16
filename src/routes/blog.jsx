@@ -57,8 +57,8 @@ function BlogRoute() {
   return (
     <div className="app">
       <HeaderComponent />
+      <SubheaderComponent />
       <div className="body">
-        <SubheaderComponent />
         <BlogPostComponent post={post} />
       </div>
       <FooterComponent />
@@ -78,8 +78,8 @@ function BlogListRoute() {
   return (
     <div className="app">
       <HeaderComponent />
+      <SubheaderComponent />
       <div className="body">
-        <SubheaderComponent />
         <BlogPostListComponent
           postList={postList}
           postCount={postCount}

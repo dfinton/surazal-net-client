@@ -6,12 +6,9 @@ import './subheader.scss';
 class ColumnComponent extends Component {
   render() {
     return (
-      <div className="top-level column">
-        <div className="column-header">
-          <h2>Navigate</h2>
-        </div>
-        <div className="column-body">
-          <ul className="column-links">
+      <div className="top-level subheader">
+        <div className="subheader-navigation">
+          <ul className="subheader-links">
             <li><Link to={"/"}>Main Page</Link></li>
             <li><Link to={"/blog"}>Blog</Link></li>
             <li><Link to={"/fractal"}>Fractals</Link></li>
