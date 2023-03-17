@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import MetaTags from 'react-meta-tags';
 
 import FractalImageComponent from '../components/fractal/image';
 import FractalImageListComponent from '../components/fractal/image-list';
@@ -8,7 +9,7 @@ import cmsFractalStore from '../store/cms-fractal';
 
 const cmsFractal = cmsFractalStore();
 
-const fractalLoader = async ({params}) => {
+const fractalLoader = async ({request, params}) => {
   const {id} = params;
 
   if (!id) {
@@ -19,6 +20,7 @@ const fractalLoader = async ({params}) => {
 
   return {
     fractal: cmsFractal.fractal[id],
+    url: request.url,
   };
 };
 
@@ -51,10 +53,47 @@ const fractalListLoader = async ({request}) => {
 };
 
 function FractalRoute() {
-  const {fractal} = useLoaderData();
+  const {fractal, url} = useLoaderData();
+
+  const titleMetaTag = (
+    <meta property="og:title" content={fractal.name} />
+  );
+
+  const descriptionMetaTag = (
+    <meta property="og:description" content={fractal.altText} />
+  );
+
+  let imageMetaTag;
+
+  const fractalSizes = [
+    fractal.large,
+    fractal.medium,
+    fractal.small,
+    fractal.thumbnail,
+  ];
+
+  for (const imageMetaTagFractal of fractalSizes) {
+    if (imageMetaTagFractal) {
+      imageMetaTag = (
+        <meta property="og:image" content={imageMetaTagFractal.url} />
+      );
+
+      break;
+    }
+  }
+
+  const urlMetaTag = (
+    <meta property="og:url" content={url} />
+  );
 
   return (
     <div className="app">
+      <MetaTags>
+        {titleMetaTag}
+        {descriptionMetaTag}
+        {imageMetaTag}
+        {urlMetaTag}
+      </MetaTags>
       <HeaderComponent />
       <div className="body">
         <FractalImageComponent fractal={fractal} />
