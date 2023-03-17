@@ -1,6 +1,5 @@
 import { Component } from 'react';
 
-import FractalThumbnailComponent from './thumbnail';
 import './image.scss';
 
 class FractalImageComponent extends Component {
@@ -9,43 +8,55 @@ class FractalImageComponent extends Component {
 
     let thumbnailLink, smallLink, mediumLink, largeLink;
 
+    let preview = (
+      <span><strong>No Preview Available</strong></span>
+    );
+
     if (fractal.thumbnail) {
       thumbnailLink = (
-        <li>
+        <span className="fractal-image-link">
           <a href={fractal.thumbnail.url}>
-            Small - {fractal.thumbnail.width}x{fractal.thumbnail.height}
+            Thumbnail: {fractal.thumbnail.width}x{fractal.thumbnail.height}
           </a>
-        </li>
+        </span>
       );
     }
 
     if (fractal.small) {
       smallLink = (
-        <li>
+        <span className="fractal-image-link">
           <a href={fractal.small.url}>
-            Small - {fractal.small.width}x{fractal.small.height}
+    Small: {fractal.small.width}x{fractal.small.height}
           </a>
-        </li>
+        </span>
+      );
+
+      preview = (
+        <div className="fractal-image-preview-container">
+          <a href={fractal.small.url}>
+            <img alt={fractal.altText} src={fractal.small.url} />
+          </a>
+        </div>
       );
     }
 
     if (fractal.medium) {
       mediumLink = (
-        <li>
+        <span className="fractal-image-link">
           <a href={fractal.medium.url}>
-            Small - {fractal.medium.width}x{fractal.medium.height}
+            Medium: {fractal.medium.width}x{fractal.medium.height}
           </a>
-        </li>
+        </span>
       );
     }
 
     if (fractal.large) {
       largeLink = (
-        <li>
+        <span className="fractal-image-link">
           <a href={fractal.large.url}>
-            Small - {fractal.large.width}x{fractal.large.height}
+            Full Size: {fractal.large.width}x{fractal.large.height}
           </a>
-        </li>
+        </span>
       );
     }
 
@@ -53,13 +64,13 @@ class FractalImageComponent extends Component {
       <div className="top-level content">
         <div className="fractal-image">
           <div className="fractal-image-links">
-            <FractalThumbnailComponent fractal={fractal} />
-            <ul>
-              {thumbnailLink}
-              {smallLink}
-              {mediumLink}
-              {largeLink}
-            </ul>
+            {thumbnailLink}
+            {smallLink}
+            {mediumLink}
+            {largeLink}
+          </div>
+          <div className="fractal-image-preview">
+            {preview}
           </div>
         </div>
       </div>

@@ -2,11 +2,43 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  background-color: #453525;
   border-radius: 0.25rem;
   overflow: hidden;
 
   .fractal-image-links {
-    background-color: #453525;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding: 0.5rem;
+    justify-content: center;
+
+    .fractal-image-link {
+      background-color: #655545;
+      padding: 0.25rem 0.25rem 0.125rem 0.25rem;
+      margin-right: 0.25rem;
+      border-radius: 0.25rem;
+    }
+  }
+
+  .fractal-image-preview {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    justify-content: center;
+
+    .fractal-image-preview-container {
+      background-color: #655545;
+      padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      width: 960px;
+      max-width: 960px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }
