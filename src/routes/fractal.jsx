@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router-dom";
 
-import SubheaderComponent from '../components/layout/subheader';
 import FractalImageComponent from '../components/fractal/image';
 import FractalImageListComponent from '../components/fractal/image-list';
 import FooterComponent from '../components/layout/footer';
@@ -57,7 +56,6 @@ function FractalRoute() {
   return (
     <div className="app">
       <HeaderComponent />
-      <SubheaderComponent />
       <div className="body">
         <FractalImageComponent fractal={fractal} />
       </div>
@@ -78,7 +76,6 @@ function FractalListRoute() {
   return (
     <div className="app">
       <HeaderComponent />
-      <SubheaderComponent />
       <div className="body">
         <FractalImageListComponent
           fractalCount={fractalCount} 

@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router-dom";
 
-import SubheaderComponent from '../components/layout/subheader';
 import BlogPostComponent from '../components/blog/post';
 import BlogPostListComponent from '../components/blog/post-list';
 import FooterComponent from '../components/layout/footer';
@@ -57,7 +56,6 @@ function BlogRoute() {
   return (
     <div className="app">
       <HeaderComponent />
-      <SubheaderComponent />
       <div className="body">
         <BlogPostComponent post={post} />
       </div>
@@ -78,7 +76,6 @@ function BlogListRoute() {
   return (
     <div className="app">
       <HeaderComponent />
-      <SubheaderComponent />
       <div className="body">
         <BlogPostListComponent
           postList={postList}

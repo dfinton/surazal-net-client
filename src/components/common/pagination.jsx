@@ -35,10 +35,21 @@ class PaginationComponent extends Component {
       ...pageClassList,
     ];
 
-    const firstPageText = <span>&lt;&lt;</span>;
-    const prevPageText = <span>&lt;</span>;
-    const nextPageText = <span>&gt;</span>;
-    const lastPageText = <span>&gt;&gt;</span>;
+    const firstPageText = (
+      <span>&lt;&lt;</span>
+    );
+
+    const prevPageText = (
+      <span>&lt;</span>
+    );
+
+    const nextPageText = (
+      <span>&gt;</span>
+    );
+    
+    const lastPageText = (
+      <span>&gt;&gt;</span>
+    );
 
     if (page === 1) {
       firstPageClassList.push('disabled');
@@ -55,25 +66,29 @@ class PaginationComponent extends Component {
     const nextPageClass = nextPageClassList.join(' ');
     const lastPageClass = lastPageClassList.join(' ');
 
-    const firstPageButton =
+    const firstPageButton = (
       <span className={firstPageClass}>
         {firstPageText}
-      </span>;
+      </span>
+    );
 
-    const prevPageButton =
+    const prevPageButton = (
       <span className={prevPageClass}>
         {prevPageText}
-      </span>;
+      </span>
+    );
 
-    const nextPageButton =
+    const nextPageButton = (
       <span className={nextPageClass}>
         {nextPageText}
-      </span>;
+      </span>
+    );
 
-    const lastPageButton =
+    const lastPageButton = (
       <span className={lastPageClass}>
         {lastPageText}
-      </span>;
+      </span>
+    );
 
     let firstPage = firstPageButton;
     let prevPage = prevPageButton;
@@ -81,13 +96,23 @@ class PaginationComponent extends Component {
     let lastPage = lastPageButton;
 
     if (page > 1) {
-      firstPage = <Link to={firstPageUrl}>{firstPageButton}</Link>
-      prevPage = <Link to={prevPageUrl}>{prevPageButton}</Link>
+      firstPage = (
+        <Link to={firstPageUrl}>{firstPageButton}</Link>
+      );
+
+      prevPage = (
+        <Link to={prevPageUrl}>{prevPageButton}</Link>
+      );
     }
 
     if (page < pageCount) {
-      nextPage = <Link to={nextPageUrl}>{nextPageButton}</Link>
-      lastPage = <Link to={lastPageUrl}>{lastPageButton}</Link>
+      nextPage = (
+        <Link to={nextPageUrl}>{nextPageButton}</Link>
+      );
+
+      lastPage = (
+        <Link to={lastPageUrl}>{lastPageButton}</Link>
+      );
     }
 
     const pages = [];
@@ -99,18 +124,26 @@ class PaginationComponent extends Component {
         ...pageClassList,
       ];
 
-      const currentPageText = <span>{currentPageNumber}</span>;
+      const currentPageText = (
+        <span>{currentPageNumber}</span>
+      );
 
       if (currentPageNumber === page) {
         currentPageClassList.push('active');
       }
 
       const currentPageClass = currentPageClassList.join(' ');
-      const currentPageButton = <span className={currentPageClass}>{currentPageText}</span>;
+
+      const currentPageButton = (
+        <span key={currentPageNumber} className={currentPageClass}>{currentPageText}</span>
+      );
+
       let currentPage = currentPageButton;
 
       if (currentPageNumber !== page) {
-        currentPage = <Link to={currentPageUrl}>{currentPageButton}</Link>;
+        currentPage = (
+          <Link key={currentPageNumber} to={currentPageUrl}>{currentPageButton}</Link>
+        );
       }
 
       pages.push(currentPage);
