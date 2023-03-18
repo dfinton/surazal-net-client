@@ -13,6 +13,7 @@ const FractalImageView = function() {
   const router = useRouter();
   const id = router.query.id;
   const fractal = cmsFractalStore.fractal[id];
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`;
 
   return (
     <div className="app">
@@ -24,6 +25,7 @@ const FractalImageView = function() {
         <meta key="image:height" property="og:image:height" content={fractal.medium.height} />
         <meta key="image:alt" property="og:image:alt" content={fractal.altText} />
         <meta key="type" property="og:type" content="website" />
+        <meta key="url" property="og:url" content={url} />
       </Head>
       <HeaderComponent />
       <div className="body">
