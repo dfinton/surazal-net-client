@@ -22,6 +22,8 @@ const FractalImageView = function() {
         <meta key="image" property="og:image" content={fractal.medium.url} />
         <meta key="image:width" property="og:image:width" content={fractal.medium.width} />
         <meta key="image:height" property="og:image:height" content={fractal.medium.height} />
+        <meta key="image:alt" property="og:image:alt" content={fractal.altText} />
+        <meta key="type" property="og:type" content="website" />
       </Head>
       <HeaderComponent />
       <div className="body">
