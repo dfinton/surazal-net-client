@@ -1,14 +1,14 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import PaginationComponent from '../common/pagination';
 
-import './post-list.scss';
+import styles from './post-list.module.scss';
 
 class BlogPostListComponent extends Component {
   render() {
     const {
-      postList,
+      postSummaryList,
       page,
       pageSize,
       pageCount,
@@ -23,7 +23,7 @@ class BlogPostListComponent extends Component {
       />
     );
 
-    const blogList = postList.map((post, postIndex) => {
+    const blogList = postSummaryList.map((post, postIndex) => {
       const createdAt = new Date(post.createdAt)
         .toLocaleString('en-US', {
           weekday: 'long',
@@ -38,14 +38,21 @@ class BlogPostListComponent extends Component {
       const author = post.author ? post.author.name : 'Unknown';
 
       return (
-        <div key={postIndex} className="blog-post-list-item">
-          <div className="blog-post-list-item-created-at">
+        <div key={postIndex} className={styles['blog-post-list-item']}>
+          <div className={styles['blog-post-list-item-created-at']}>
             {createdAt}
           </div>
-          <div className="blog-post-list-item-title">
-            <Link to={`/blog/${post.id}`}>{post.title}</Link>
+          <div className={styles['blog-post-list-item-title']}>
+            <Link
+              href={{
+                pathname: '/blog/[id]',
+                query: {
+                  id: post.id,
+                },
+              }}
+            >{post.title}</Link>
           </div>
-          <div className="blog-post-list-item-author">
+          <div className={styles['blog-post-list-item-author']}>
             {author}
           </div>
         </div>
@@ -54,9 +61,9 @@ class BlogPostListComponent extends Component {
 
     return (
       <div className="top-level content">
-        <div className="blog-post-list">
+        <div className={styles['blog-post-list']}>
           {pagination}
-          <div className="blog-post-list-body">
+          <div className={styles['blog-post-list-body']}>
             {blogList}
           </div>
           {pagination}

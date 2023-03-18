@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
-import './pagination.scss';
+import styles from './pagination.module.scss';
 
 class PaginationComponent extends Component {
   render() {
@@ -12,12 +12,27 @@ class PaginationComponent extends Component {
       baseUrl,
     } = this.props;
 
-    const firstPageUrl = `${baseUrl}?page=1&page-size=${pageSize}`;
-    const prevPageUrl = `${baseUrl}?page=${page - 1}&page-size=${pageSize}`;
-    const nextPageUrl = `${baseUrl}?page=${page + 1}&page-size=${pageSize}`;
-    const lastPageUrl = `${baseUrl}?page=${pageCount}&page-size=${pageSize}`;
+    const firstPageQuery = {
+      page: 1,
+      'page-size': pageSize,
+    }
 
-    const pageClassList = ['page-number'];
+    const prevPageQuery = {
+      page: page - 1,
+      'page-size': pageSize,
+    }
+
+    const nextPageQuery = {
+      page: page + 1,
+      'page-size': pageSize,
+    }
+
+    const lastPageQuery = {
+      page: pageCount,
+      'page-size': pageSize,
+    }
+
+    const pageClassList = [styles['page-number']];
 
     const firstPageClassList = [
       ...pageClassList,
@@ -52,13 +67,13 @@ class PaginationComponent extends Component {
     );
 
     if (page === 1) {
-      firstPageClassList.push('disabled');
-      prevPageClassList.push('disabled');
+      firstPageClassList.push(styles['disabled']);
+      prevPageClassList.push(styles['disabled']);
     }
 
-    if (page === pageCount) {
-      nextPageClassList.push('disabled');
-      lastPageClassList.push('disabled');
+    if (page >= pageCount) {
+      nextPageClassList.push(styles['disabled']);
+      lastPageClassList.push(styles['disabled']);
     }
 
     const firstPageClass = firstPageClassList.join(' ');
@@ -97,28 +112,43 @@ class PaginationComponent extends Component {
 
     if (page > 1) {
       firstPage = (
-        <Link to={firstPageUrl}>{firstPageButton}</Link>
+        <Link href={{
+          pathname: baseUrl,
+          query: firstPageQuery,
+        }}>{firstPageButton}</Link>
       );
 
       prevPage = (
-        <Link to={prevPageUrl}>{prevPageButton}</Link>
+        <Link href={{
+          pathname: baseUrl,
+          query: prevPageQuery,
+        }}>{prevPageButton}</Link>
       );
     }
 
     if (page < pageCount) {
       nextPage = (
-        <Link to={nextPageUrl}>{nextPageButton}</Link>
+        <Link href={{
+          pathname: baseUrl,
+          query: nextPageQuery,
+        }}>{nextPageButton}</Link>
       );
 
       lastPage = (
-        <Link to={lastPageUrl}>{lastPageButton}</Link>
+        <Link href={{
+          pathname: baseUrl,
+          query: lastPageQuery,
+        }}>{lastPageButton}</Link>
       );
     }
 
     const pages = [];
 
     for (let currentPageNumber = 1; currentPageNumber <= pageCount; currentPageNumber++) {
-      const currentPageUrl = `${baseUrl}?page=${currentPageNumber}&page-size=${pageSize}`;
+      const currentPageQuery = {
+        page: currentPageNumber,
+        'page-size': pageSize,
+      };
 
       const currentPageClassList = [
         ...pageClassList,
@@ -129,7 +159,7 @@ class PaginationComponent extends Component {
       );
 
       if (currentPageNumber === page) {
-        currentPageClassList.push('active');
+        currentPageClassList.push(styles['active']);
       }
 
       const currentPageClass = currentPageClassList.join(' ');
@@ -142,7 +172,10 @@ class PaginationComponent extends Component {
 
       if (currentPageNumber !== page) {
         currentPage = (
-          <Link key={currentPageNumber} to={currentPageUrl}>{currentPageButton}</Link>
+          <Link key={currentPageNumber} href={{
+            pathname: baseUrl,
+            query: currentPageQuery,
+          }}>{currentPageButton}</Link>
         );
       }
 
@@ -150,7 +183,7 @@ class PaginationComponent extends Component {
     }
 
     return (
-      <div className="pagination">
+      <div className={styles['pagination']}>
         {firstPage}
         {prevPage}
         {pages}

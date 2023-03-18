@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { Component } from 'react';
+import Link from 'next/link';
 
-import './thumbnail.scss';
+import styles from './thumbnail.module.scss';
 
 class FractalThumbnailComponent extends Component {
   render() {
@@ -12,13 +12,23 @@ class FractalThumbnailComponent extends Component {
     }
 
     return (
-      <div className="fractal-thumbnail outer">
-        <div className="fractal-thumbnail inner">
-          <Link to={`/fractal/${fractal.id}`}>
+      <div className={styles['fractal-thumbnail-outer']}>
+        <div className={styles['fractal-thumbnail-inner']}>
+          <Link href={{
+            pathname: '/fractal/[id]',
+            query: {
+              id: fractal.id,
+            },
+          }}>
             <img alt={fractal.altText} src={fractal.thumbnail.url} />
           </Link>
-          <div className="fractal-thumbnail description">
-            <Link to={`/fractal/${fractal.id}`}>
+          <div className={styles['fractal-thumbnail-description']}>
+            <Link href={{
+              pathname: '/fractal/[id]',
+              query: {
+                id: fractal.id,
+              },
+            }}>
               {fractal.name}
             </Link>
           </div>

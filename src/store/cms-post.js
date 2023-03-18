@@ -1,13 +1,14 @@
 import { makeObservable, observable, action } from 'mobx';
-import cms from '../service/cms';
-
-let cmsPostStoreSingleton;
+import cms from '@/service/cms';
 
 class CmsPostStore {
   post = {};
   latestPostId = undefined;
   postSummaryList = [];
   postCount = undefined;
+  page = 1;
+  pageSize = 10;
+  pageCount = 0;
 
   constructor() {
     makeObservable(this, {
@@ -15,13 +16,21 @@ class CmsPostStore {
       latestPostId: observable,
       postSummaryList: observable,
       postCount: observable,
+      page: observable,
+      pageSize: observable,
+      pageCount: observable,
       fetchLatestPost: action,
       fetchPost: action,
       fetchPostList: action,
       fetchPostCount: action,
+      calculatePageCount: action,
       setPost: action,
-      setPostList: action,
+      setLatestPostId: action,
+      setPostSummaryList: action,
       setPostCount: action,
+      setPage: action,
+      setPageSize: action,
+      setPageCount: action,
     });
   }
 
@@ -121,7 +130,8 @@ class CmsPostStore {
 
     const [post] = data.posts;
 
-    this.setPost({post, isLatest: true});
+    this.setPost({post});
+    this.setLatestPostId({id: post.id});
   }
 
   async fetchPostList({page, pageSize}) {
@@ -151,7 +161,9 @@ class CmsPostStore {
 
     const posts = data.posts ?? [];
 
-    this.setPostList({posts});
+    this.setPostSummaryList({postSummaryList: posts});
+    this.setPage({page});
+    this.setPageSize({pageSize});
   }
 
   async fetchPostCount() {
@@ -170,33 +182,51 @@ class CmsPostStore {
     this.setPostCount({postCount});
   }
 
-  setPost({post, isLatest = false}) {
-    const id = post.id;
+  calculatePageCount() {
+    const pageCount = Math.ceil(this.postCount / this.pageSize);
 
-    this.post[id] = post;
-
-    if (isLatest) {
-      this.latestPostId = id;
-    }
+    this.setPageCount({pageCount});
   }
 
-  setPostList({posts}) {
-    this.postList = posts;
+  setLatestPostId({id}) {
+    this.latestPostId = id;
+  }
+
+  setPost({post}) {
+    this.post[post.id] = post;
+  }
+
+  setPostSummaryList({postSummaryList}) {
+    this.postSummaryList = postSummaryList;
   }
 
   setPostCount({postCount}) {
     this.postCount = postCount;
   }
-}
 
-const cmsPostStore = () => {
-  if (cmsPostStoreSingleton) {
-    return cmsPostStoreSingleton;
+  setPage({page}) {
+    this.page = page;
   }
 
-  cmsPostStoreSingleton = new CmsPostStore();
+  setPageSize({pageSize}) {
+    this.pageSize = pageSize;
+  }
 
-  return cmsPostStoreSingleton;
-};
+  setPageCount({pageCount}) {
+    this.pageCount = pageCount;
+  }
 
-export default cmsPostStore;
+  hydrate(data) {
+    if (!data) return;
+
+    this.latestPostId = data.latestPostId;
+    this.post = data.post;
+    this.postSummaryList = data.postSummaryList;
+    this.postCount = data.postCount;
+    this.page = data.page;
+    this.pageSize = data.pageSize;
+    this.pageCount = data.pageCount;
+  }
+}
+
+export default CmsPostStore;

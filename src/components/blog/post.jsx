@@ -1,10 +1,10 @@
 import { Component } from 'react';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
-import { convertDocumentObjectToElement } from '../../lib/cms';
+import { convertDocumentObjectToElement } from '@/lib/cms';
 
 import FractalThumbnailComponent from '../fractal/thumbnail';
-import './post.scss';
+import styles from './post.module.scss';
 
 class BlogPostComponent extends Component {
   render() {
@@ -31,11 +31,18 @@ class BlogPostComponent extends Component {
       });
 
     const blogPostLink = (
-      <Link to={`/blog/${post.id}`}>{createdAt}</Link>
+      <Link
+        href={{
+          pathname: '/blog/[id]',
+          query: {
+            id: post.id,
+          },
+        }}
+      >{createdAt}</Link>
     );
 
     const blogPostListLink = (
-      <Link to={'/blog'}>View older posts</Link>
+      <Link href={'/blog'}>View older posts</Link>
     );
 
     const authorAttribution = post.author ? post.author.name : 'Unknown';
@@ -50,7 +57,7 @@ class BlogPostComponent extends Component {
       });
 
       fractalGallery = (
-        <div className="blog-fractal-gallery">
+        <div className={styles['blog-fractal-gallery']}>
           {fractalThumbnails}
         </div>
       );
@@ -58,12 +65,12 @@ class BlogPostComponent extends Component {
 
     return (
       <div className="top-level content">
-        <div className="blog-post">
-          <div className="blog-header">
+        <div className={styles['blog-post']}>
+          <div className={styles['blog-header']}>
             <h2>{post.title}</h2>
             <div>by <strong>{authorAttribution}</strong> on {blogPostLink} ({blogPostListLink})</div>
           </div>
-          <div className="blog-body">
+          <div className={styles['blog-body']}>
             <div>{fullPost}</div>
             {fractalGallery}
           </div>

@@ -1,24 +1,32 @@
 import { makeObservable, observable, action } from 'mobx';
-import cms from '../service/cms';
-
-let cmsFractalStoreSingleton;
+import cms from '@/service/cms';
 
 class CmsFractalStore {
   fractal = {};
   fractalList = [];
   fractalCount = undefined;
+  page = 1;
+  pageSize = 10;
+  pageCount = 0;
 
   constructor() {
     makeObservable(this, {
       fractal: observable,
       fractalList: observable,
       fractalCount: observable,
+      page: observable,
+      pageSize: observable,
+      pageCount: observable,
       fetchFractal: action,
       fetchFractalList: action,
       fetchFractalCount: action,
+      calculatePageCount: action,
       setFractal: action,
       setFractalList: action,
       setFractalCount: action,
+      setPage: action,
+      setPageSize: action,
+      setPageCount: action,
     })
   }
 
@@ -112,7 +120,9 @@ class CmsFractalStore {
 
     const fractals = data.fractals ?? [];
 
-    this.setFractalList({fractals});
+    this.setFractalList({fractalList: fractals});
+    this.setPage({page});
+    this.setPageSize({pageSize});
   }
 
   async fetchFractalCount() {
@@ -131,27 +141,46 @@ class CmsFractalStore {
     this.setFractalCount({fractalCount});
   }
 
+  calculatePageCount() {
+    const pageCount = Math.ceil(this.fractalCount / this.pageSize);
+
+    this.setPageCount({pageCount});
+  }
+
   setFractal({fractal}) {
     this.fractal[fractal.id] = fractal;
   }
 
-  setFractalList({fractals}) {
-    this.fractalList = fractals;
+  setFractalList({fractalList}) {
+    this.fractalList = fractalList;
   }
 
   setFractalCount({fractalCount}) {
     this.fractalCount = fractalCount;
   }
-}
 
-const cmsFractalStore = () => {
-  if (cmsFractalStoreSingleton) {
-    return cmsFractalStoreSingleton;
+  setPage({page}) {
+    this.page = page;
   }
 
-  cmsFractalStoreSingleton = new CmsFractalStore();
+  setPageSize({pageSize}) {
+    this.pageSize = pageSize;
+  }
 
-  return cmsFractalStoreSingleton;
-};
+  setPageCount({pageCount}) {
+    this.pageCount = pageCount;
+  }
 
-export default cmsFractalStore;
+  hydrate(data) {
+    if (!data) return;
+
+    this.fractal = data.fractal;
+    this.fractalList = data.fractalList;
+    this.fractalCount = data.fractalCount;
+    this.page = data.page;
+    this.pageSize = data.pageSize;
+    this.pageCount = data.pageCount;
+  }
+}
+
+export default CmsFractalStore;

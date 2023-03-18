@@ -3,7 +3,7 @@ import { Component } from 'react';
 import PaginationComponent from '../common/pagination';
 
 import FractalThumbnailComponent from './thumbnail';
-import './image-list.scss';
+import styles from './image-list.module.scss';
 
 class FractalImageListComponent extends Component {
   render() {
@@ -31,9 +31,9 @@ class FractalImageListComponent extends Component {
 
     return (
       <div className="top-level content">
-        <div className="fractal-image-list">
+        <div className={styles['fractal-image-list']}>
           {pagination}
-          <div className="fractal-image-list-gallery">
+          <div className={styles['fractal-image-list-gallery']}>
             {fractalListGallery}
           </div>
           {pagination}

@@ -1,22 +1,22 @@
 import { Component } from 'react';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
-import './header.scss';
+import styles from './header.module.scss';
 
 class HeaderComponent extends Component {
   render() {
     return (
       <header className="top-level">
-        <div className="header">
+        <div className={styles.header}>
           <h1>The 24th Dimension</h1>
-          <span><em>"This site is under construction"</em></span>
+          <span><em>&quot;This site is under construction&quot;</em></span>
         </div>
-        <div className="subheader">
-          <div className="subheader-navigation">
-            <ul className="subheader-links">
-              <li><Link to={"/"}>Main Page</Link></li>
-              <li><Link to={"/blog"}>Blog</Link></li>
-              <li><Link to={"/fractal"}>Fractals</Link></li>
+        <div className={styles.subheader}>
+          <div className={styles['subheader-navigation']}>
+            <ul className={styles['subheader-links']}>
+              <li><Link href={"/"}>Main Page</Link></li>
+              <li><Link href={"/blog"}>Blog</Link></li>
+              <li><Link href={"/fractal"}>Fractals</Link></li>
             </ul>
           </div>
         </div>

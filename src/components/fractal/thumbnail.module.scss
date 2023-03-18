@@ -1,4 +1,4 @@
-.fractal-thumbnail.outer {
+.fractal-thumbnail-outer {
   background-color: #655545;
   flex: 0 1 160px;
   max-width: 160px;
@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: center;
 
-  .fractal-thumbnail.inner {
+  .fractal-thumbnail-inner {
     max-height: calc(90px + 2rem);
     max-width: 160px;
     display: flex;
@@ -26,7 +26,7 @@
     }
   }
 
-  .fractal-thumbnail.description {
+  .fractal-thumbnail-description {
     text-align: center;
     margin-top: 0.25rem;
     overflow: hidden;
