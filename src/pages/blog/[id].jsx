@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
-
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+
 import { useStore } from '@/components/store/store-provider';
 import BlogPostComponent from '@/components/blog/post';
 import FooterComponent from '@/components/layout/footer';
@@ -12,9 +13,29 @@ const BlogPostView = function() {
   const router = useRouter();
   const id = router.query.id;
   const post = cmsPostStore.post[id];
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`;
+  const imageMeta = [];
+
+  if (post.fractals) {
+    const fractal = post.fractals[0];
+
+    if (fractal.medium) {
+      imageMeta.push((<meta key="image" property="og:image" content={fractal.medium.url} />));
+      imageMeta.push((<meta key="image:width" property="og:image:width" content={fractal.medium.width} />));
+      imageMeta.push((<meta key="image:height" property="og:image:height" content={fractal.medium.height} />));
+      imageMeta.push((<meta key="image:alt" property="og:image:alt" content={fractal.altText} />));
+    }
+  }
 
   return (
     <div className="app">
+      <Head>
+        <meta key="title" property="og:title" content={post.title} />
+        <meta key="description" property="og:description" content={post.title} />
+        {imageMeta}
+        <meta key="type" property="og:type" content="website" />
+        <meta key="url" property="og:url" content={url} />
+      </Head>
       <HeaderComponent />
       <div className="body">
         <BlogPostComponent post={post} />

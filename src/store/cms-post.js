@@ -70,6 +70,14 @@ class CmsPostStore {
               extension
               url
             }
+            medium {
+              id
+              filesize
+              width
+              height
+              extension
+              url
+            }
           }
         }
       }

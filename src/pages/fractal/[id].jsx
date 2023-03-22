@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
-
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+
 import { useStore } from '@/components/store/store-provider';
 import FractalImageComponent from '@/components/fractal/image';
 import FooterComponent from '@/components/layout/footer';
