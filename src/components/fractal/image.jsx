@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Component } from 'react';
 
 import styles from './image.module.scss';
@@ -26,7 +27,7 @@ class FractalImageComponent extends Component {
       smallLink = (
         <span className={styles['fractal-image-link']}>
           <a href={fractal.small.url}>
-    Small: {fractal.small.width}x{fractal.small.height}
+            Small: {fractal.small.width}x{fractal.small.height}
           </a>
         </span>
       );
@@ -34,7 +35,12 @@ class FractalImageComponent extends Component {
       preview = (
         <div className={styles['fractal-image-preview-container']}>
           <a href={fractal.small.url}>
-            <img alt={fractal.altText} src={fractal.small.url} />
+            <Image
+              alt={fractal.altText}
+              src={fractal.small.url}
+              width={fractal.small.width}
+              height={fractal.small.height}
+            />
           </a>
         </div>
       );

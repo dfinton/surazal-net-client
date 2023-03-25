@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './thumbnail.module.scss';
@@ -20,7 +21,12 @@ class FractalThumbnailComponent extends Component {
               id: fractal.id,
             },
           }}>
-            <img alt={fractal.altText} src={fractal.thumbnail.url} />
+            <Image
+              alt={fractal.altText}
+              src={fractal.thumbnail.url}
+              width={fractal.thumbnail.width}
+              height={fractal.thumbnail.height}
+            />
           </Link>
           <div className={styles['fractal-thumbnail-description']}>
             <Link href={{
