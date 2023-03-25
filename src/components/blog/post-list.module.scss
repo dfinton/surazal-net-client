@@ -13,22 +13,36 @@
     .blog-post-list-item {
       background-color: #453525;
       padding: 0.5rem;
-
       display: flex;
-      flex-direction: row;
-      align-items: stretch;
+    }
 
+    @media screen and (min-width: 600px) {
+      .blog-post-list-item {
+        flex-direction: row;
+        align-items: stretch;
+
+        .blog-post-list-item-created-at {
+          flex: 0 1 18rem;
+        }
+
+        .blog-post-list-item-title {
+          flex: 1;
+        }
+
+        .blog-post-list-item-author {
+          flex: 0 1 10rem;
+          text-align: right;
+        }
+      }
+    }
+
+    @media screen and (max-width: 600px) {
       .blog-post-list-item-created-at {
-        flex: 0 1 18rem;
+        padding-bottom: 0.5rem;
       }
 
-      .blog-post-list-item-title {
-        flex: 1;
-      }
-
-      .blog-post-list-item-author {
-        flex: 0 1 10rem;
-        text-align: right;
+      .blog-post-list-item {
+        flex-direction: column;
       }
     }
 
