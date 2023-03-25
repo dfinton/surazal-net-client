@@ -14,6 +14,7 @@ const BlogPostView = function() {
   const id = router.query.id;
   const post = cmsPostStore.post[id];
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`;
+  const title = `${post.title} - ${process.env.NEXT_PUBLIC_SITE_TITLE}`;
   const imageMeta = [];
 
   if (post.fractals) {
@@ -30,7 +31,8 @@ const BlogPostView = function() {
   return (
     <div className="app">
       <Head>
-        <meta key="title" property="og:title" content={post.title} />
+        <title>{title}</title>
+        <meta key="title" property="og:title" content={title} />
         <meta key="description" property="og:description" content={post.title} />
         {imageMeta}
         <meta key="type" property="og:type" content="website" />

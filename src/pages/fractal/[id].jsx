@@ -14,11 +14,13 @@ const FractalImageView = function() {
   const id = router.query.id;
   const fractal = cmsFractalStore.fractal[id];
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`;
+  const title = `${fractal.name} - ${process.env.NEXT_PUBLIC_SITE_TITLE}`;
 
   return (
     <div className="app">
       <Head>
-        <meta key="title" property="og:title" content={fractal.name} />
+        <title>{title}</title>
+        <meta key="title" property="og:title" content={title} />
         <meta key="description" property="og:description" content={fractal.altText} />
         <meta key="image" property="og:image" content={fractal.medium.url} />
         <meta key="image:width" property="og:image:width" content={fractal.medium.width} />

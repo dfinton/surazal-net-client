@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import Head from 'next/head';
 
 import { useStore } from '@/components/store/store-provider';
 import FractalImageListComponent from '@/components/fractal/image-list';
@@ -17,8 +18,13 @@ const FractalListView = function() {
     pageCount,
   } = cmsFractalStore;
 
+  const title = `Fractals - ${process.env.NEXT_PUBLIC_SITE_TITLE}`;
+
   return (
     <div className="app">
+      <Head>
+        <title>{title}</title>
+      </Head>
       <HeaderComponent />
       <div className="body">
         <FractalImageListComponent
