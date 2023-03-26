@@ -9,17 +9,19 @@
 
   .fractal-thumbnail-image {
     width: 160px;
-    height: 120px;
+    height: 90px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   .fractal-thumbnail-description {
     width: 160px;
     height: 1rem;
     overflow: hidden;
+    text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 0.5rem 0 0 0;
