@@ -13,8 +13,8 @@ class FractalThumbnailComponent extends Component {
     }
 
     return (
-      <div className={styles['fractal-thumbnail-outer']}>
-        <div className={styles['fractal-thumbnail-inner']}>
+      <div className={styles['fractal-thumbnail']}>
+        <div className={styles['fractal-thumbnail-image']}>
           <Link href={{
             pathname: '/fractal/[id]',
             query: {
@@ -28,16 +28,16 @@ class FractalThumbnailComponent extends Component {
               height={fractal.thumbnail.height}
             />
           </Link>
-          <div className={styles['fractal-thumbnail-description']}>
-            <Link href={{
-              pathname: '/fractal/[id]',
-              query: {
-                id: fractal.id,
-              },
-            }}>
-              {fractal.name}
-            </Link>
-          </div>
+        </div>
+        <div className={styles['fractal-thumbnail-description']}>
+          <Link href={{
+            pathname: '/fractal/[id]',
+            query: {
+              id: fractal.id,
+            },
+          }}>
+            {fractal.name}
+          </Link>
         </div>
       </div>
     );
