@@ -1,0 +1,7 @@
+$fractal-thumbnail-pixel-width: 160;
+$fractal-thumbnail-pixel-height: 90;
+
+:export {
+  fractalThumbnailPixelWidth: $fractal-thumbnail-pixel-width;
+  fractalThumbnailPixelHeight: $fractal-thumbnail-pixel-height;
+}

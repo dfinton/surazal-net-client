@@ -12,8 +12,9 @@ class FractalThumbnailComponent extends Component {
       return;
     }
 
-    // TODO I'd like to find out if we can pull this from the styles instead of hardcoding it
-    const [windowWidth, windowHeight] = [160, 90];
+    const {fractalThumbnailPixelWidth, fractalThumbnailPixelHeight} = styles;
+    const windowWidth = Number(fractalThumbnailPixelWidth);
+    const windowHeight = Number(fractalThumbnailPixelHeight);
     const windowAspectRatio = windowWidth / windowHeight;
     const thumbnailAspectRatio = fractal.thumbnail.width / fractal.thumbnail.height;
 

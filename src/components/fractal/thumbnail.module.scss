@@ -1,3 +1,5 @@
+@import '@/styles/variables.scss';
+
 .fractal-thumbnail {
   display: flex;
   flex-direction: column;
@@ -8,8 +10,8 @@
   margin: 0.25rem;
 
   .fractal-thumbnail-image {
-    width: 160px;
-    height: 90px;
+    width: $fractal-thumbnail-pixel-width + px;
+    height: $fractal-thumbnail-pixel-height + px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -18,7 +20,7 @@
   }
 
   .fractal-thumbnail-description {
-    width: 160px;
+    width: $fractal-thumbnail-pixel-width + px;
     height: 1rem;
     overflow: hidden;
     text-align: center;
