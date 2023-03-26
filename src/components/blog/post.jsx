@@ -49,7 +49,7 @@ class BlogPostComponent extends Component {
 
     let fractalGallery;
 
-    if (post.fractals) {
+    if (post.fractals.length) {
       const fractalThumbnails = post.fractals.map((fractal, fractalIndex) => {
         return (
           <FractalThumbnailComponent key={fractalIndex} fractal={fractal} />

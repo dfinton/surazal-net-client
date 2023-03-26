@@ -17,7 +17,7 @@ const BlogPostView = function() {
   const title = `${post.title} - ${process.env.NEXT_PUBLIC_SITE_TITLE}`;
   const imageMeta = [];
 
-  if (post.fractals) {
+  if (post.fractals.length) {
     const fractal = post.fractals[0];
 
     if (fractal.medium) {
